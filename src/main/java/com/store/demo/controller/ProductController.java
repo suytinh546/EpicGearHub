@@ -100,7 +100,8 @@ public class ProductController {
 	public String updatepass(HttpServletRequest request,@ModelAttribute("account") Account updateAccount) {
 		String username = request.getRemoteUser();
 		Account account = accountService.findById(username);
-		Account accountupdate = account;
+		Account accountupdate;
+		accountupdate = account;
 		accountupdate.setPassword((updateAccount).getPassword());
 		accountService.update(accountupdate);
 		return "Gear/doimksuccess";
