@@ -16,8 +16,9 @@
 	                <div class="container-fluid" style="background-color: #333333;" data-bs-theme="dark">
 	                  <a href="index.html"><img class="mt-2" src="img/EpicGearHub.png" width="290px" alt=""></a>
 	                  <div class="collapse navbar-collapse " style="display: flex;" id="navbarSupportedContent">
-	                    <form class="d-flex" role="search" style= " margin-left: 110px; width: 600px; height: 50px;" >
-	                      <input class="form-control me-2" type="search" style="background-color: white; color: black;" placeholder="Tìm kiếm sản phẩm" aria-label="Search">
+	                    <form method="get" th:action="@{/Gear/search}" class="d-flex" role="search" style= " margin-left: 110px; width: 600px; height: 50px;" >
+	                      <input class="form-control me-2" name="searchValue" type="search" style="background-color: white; color: black;" placeholder="Tìm kiếm sản phẩm" aria-label="Search">
+	                      <input type="submit" value="Tim kiem">
 	                    </form>
 	                </div>
 	                <div style="font-size: 25px; float: right; padding-right: 10px;">
@@ -54,6 +55,9 @@
 		                      <a th:href="@{/Gear/order/list}" class="nav-link font-monospace" style="color: white;">Giỏ của bạn</a>
 		                    </li>
 		                    <li class="nav-item">
+		                      <a th:href="@{/Gear/doimk}" class="nav-link font-monospace" style="color: white;">ĐỔI MẬT KHẨU</a>
+		                    </li>
+		                    <li class="nav-item">
 		                      <a th:if="${#request.isUserInRole('DIRE')or#request.isUserInRole('STAF')}" th:href="@{/Gear/admin/home/index}" class="nav-link font-monospace" style="color: white;">Admin</a>
 		                    </li>
 	                    </th:block>
@@ -65,6 +69,9 @@
 	                  </ul>
 	                  <ul th:if="${#request.remoteUser}" class="navbar-nav nav navbar-right">
 						  <li><a>[[${#request.remoteUser}]]</a></li>
+					  </ul>
+					  <ul class="navbar-nav nav navbar-right">
+						  <li><a th:href="@{/Gear/list}">list.html</a></li>
 					  </ul>
 	                </div>
 	              </div>
@@ -96,7 +103,7 @@
                   </div>
               </div>
               		
-            					<a th:each="c:${cates}" class="dropdown-item" th:href="@{|/Gear/index?cid=${c.id}|}" th:text="${c.name}"></a>
+            					<a th:each="c:${cates}" class="dropdown-item" th:href="@{|/Gear/list?cid=${c.id}|}" th:text="${c.name}"></a>
                 <div class="w-100 mt-5 mb-5"></div>
                   <div id="carouselExampleDark" class="carousel carousel-dark slide">
                     <div class="carousel-inner">

@@ -15,7 +15,7 @@ public class SecurityController {
 	@RequestMapping("/Gear/login/success")
 	public String loginSuccess(Model model) {
 		model.addAttribute("message","Đăng nhập thành công");
-		return "Gear/login";
+		return "Gear/index";
 	}
 	
 	@RequestMapping("/Gear/login/error")

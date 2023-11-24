@@ -10,4 +10,6 @@ public interface AccountService {
 	public List<Account> findAll() ;
 	public Account findById(String username) ;
 	public List<Account> getAdministrators() ;
+	void create(Account account);
+	public void update(Account accountupdate);
 }

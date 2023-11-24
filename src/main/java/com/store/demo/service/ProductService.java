@@ -13,5 +13,7 @@ public interface ProductService {
 
 	List<Product> findByCategoryId(String cid);
 
+	List<Product> findByName(String searchValue);
+
 
 }

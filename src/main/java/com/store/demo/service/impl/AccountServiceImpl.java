@@ -28,4 +28,16 @@ public class AccountServiceImpl implements AccountService{
 		return adao.getAdministrators();
 	}
 
+	@Override
+	public void create(Account account) {
+		adao.save(account);
+	}
+
+	@Override
+	public void update(Account accountupdate) {
+		// TODO Auto-generated method stub
+		adao.save(accountupdate);
+		
+	}
+
 }

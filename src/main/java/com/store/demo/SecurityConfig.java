@@ -74,7 +74,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		http.formLogin()
 			.loginPage("/Gear/login/form")		
 			.loginProcessingUrl("/Gear/login")
-			.defaultSuccessUrl("/Gear/login/success", false)
+			.defaultSuccessUrl("/Gear/index", false)
 			.failureUrl("/Gear/login/error");
 
 		http.rememberMe()

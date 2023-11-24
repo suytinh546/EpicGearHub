@@ -31,5 +31,11 @@ public class ProductServiceImpl implements ProductService {
 		return pdao.findByCategoryId(cid);
 	}
 
+	@Override
+	public List<Product> findByName(String searchValue) {
+		
+		return pdao.findByName(searchValue);
+	}
+
 
 }
