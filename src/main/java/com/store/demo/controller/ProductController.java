@@ -86,6 +86,7 @@ public class ProductController {
 		String id="CUST";
 		Role rolecust = roleService.findById(id);
 		Authorities authorities = new Authorities();
+		authorities.setId(2);
 		authorities.setAccount(account);
         authorities.setRole(rolecust);
         authodao.save(authorities);
@@ -103,7 +104,7 @@ public class ProductController {
 		Account accountupdate = account;
 		accountupdate.setPassword((updateAccount).getPassword());
 		accountService.update(accountupdate);
-		return "Gear/doimksuccess";
+		return "Gear/doimksuccess"; 
 	}
 	
 }

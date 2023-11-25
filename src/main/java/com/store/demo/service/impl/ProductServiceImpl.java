@@ -38,4 +38,14 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 
+	@Override
+	public void create(Product product) {
+		 pdao.save(product);
+	}
+
+	@Override
+	public void update(Product product) {
+		pdao.save(product);
+		}
+
 }

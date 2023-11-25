@@ -14,6 +14,9 @@ public interface ProductService {
 	List<Product> findByCategoryId(String cid);
 
 	List<Product> findByName(String searchValue);
+	void create(Product product);
+
+	void update(Product product);
 
 
 }
