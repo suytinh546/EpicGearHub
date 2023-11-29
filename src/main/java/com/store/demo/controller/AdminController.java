@@ -38,80 +38,83 @@ public class AdminController {
 	OrderDAO odao;
 	@Autowired
 	AccountDAO adao;
-	@RequestMapping("/Gear/adminproduct")
+	@RequestMapping("/Gear/Admin/adminproduct")
 	public String admin(Model model) {
 		List<Product> list = productService.findAll();
 		model.addAttribute("items",list);
-		return "Gear/adminproduct";
+		return "Gear/Admin/adminproduct";
 	}
-	@GetMapping("/Gear/product-create")
+	@GetMapping("/Gear/Admin/product-create")
 	public String showCreateForm(Model model) {
 	    // Create an empty Product object to bind with the form
 	    Product product = new Product();
 	    model.addAttribute("product", product);
-	    return "Gear/product-create";
+	    return "Gear/Admin/product-create";
 	}
 
-    @PostMapping("/Gear/create")
+    @PostMapping("/Gear/Admin/create")
     public String createProduct(@ModelAttribute("product") Product product) {
         // Add validation logic if needed
     	System.out.print(product.getName());
         productService.create(product); // Assuming you have a save method in the productService
-        return "redirect:/Gear/product-create";
+        return "redirect:/Gear/Admin/product-create";
     }
-    @RequestMapping("/Gear/product-edit/{id}")
+    @RequestMapping("/Gear/Admin/product-edit/{id}")
 	public String productedit(Model model,@PathVariable("id") Integer id) {
 		Product product = productService.findById(id);
 		model.addAttribute("product",product);
-		return "Gear/product-edit";
+		return "Gear/Admin/product-edit";
 	}
-    @PostMapping("/Gear/update/{id}")
+    @PostMapping("/Gear/Admin/Admin/update/{id}")
     public String updateProduct(@ModelAttribute("product") Product  updateProduct,@PathVariable("id") Integer id) {
         Product product = productService.findById(id);
+        System.out.println(updateProduct.getCategory().getName());
+        
         Product productUpdate = product;
         productUpdate.setName((updateProduct).getName());
         productUpdate.setPrice((updateProduct).getPrice());
 //        productUpdate.setCategory.((updateProduct).getCategory().getId());
         productUpdate.setBrand((updateProduct).getBrand());
+        productUpdate.setCategory((updateProduct.getCategory()));
         productService.update(productUpdate); // Assuming you have an update method in the productService
 		System.out.println("tới đây vẫn chạy");
-        return "redirect:/Gear/adminproduct"; // Redirect to the product list page
+        return "redirect:/Gear/Admin/adminproduct"; // Redirect to the product list page
     }
-    @GetMapping("/Gear/delete/{id}")
+    @GetMapping("/Gear/Admin/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
     	pdao.deleteById(id);
-    	return  "redirect:/Gear/adminproduct";
+    	return  "redirect:/Gear/Admin/adminproduct";
     }
-    @RequestMapping("/Gear/adminaccount")
+    @RequestMapping("/Gear/Admin/adminaccount")
     	public String adminaccount(Model model) {
     	List<Authorities> list = authoritiesService.findAll();
 		model.addAttribute("authorities",list);
-    	return "Gear/adminaccount";
+    	return "Gear/Admin/adminaccount";
     }
-    @GetMapping("/Gear/deleteaccount/{id}")
+    @GetMapping("/Gear/Admin/deleteaccount/{id}")
     public String deleteAcount(@PathVariable("id") String id) {
     	adao.deleteById(id);
-    	return  "redirect:/Gear/adminaccount";
+    	return  "redirect:/Gear/Admin/adminaccount";
     }
-    @RequestMapping("/Gear/admin-order")
+    @RequestMapping("/Gear/Admin/admin-order")
     public String adminorder(Model model) {
     	List<OrderDetail> list = orderdetailService.findAll();
     	model.addAttribute("Orders",list);
-    	return "Gear/admin-order";
+    	return "Gear/Admin/admin-order";
     }
-    @GetMapping("/Gear/accountedit/{username}")
+    @GetMapping("/Gear/Admin/accountedit/{username}")
     public String editaccount(Model model,@PathVariable("username") String username) {
     	Authorities authorities = authoritiesService.findByUsername(username);
     	model.addAttribute("authorities",authorities);
-    	return "Gear/accountedit";
+    	return "Gear/Admin/accountedit";
     }
-    @PostMapping("/Gear/accountupdate/{username}")
+    @PostMapping("/Gear/Admin/accountupdate/{username}")
     public String updateAccount(@ModelAttribute("authorities") Authorities  updateAuthorities,@PathVariable("username") String username) {
         Authorities authorities = authoritiesService.findByUsername(username);
         Authorities authoritiesUpdate = authorities;
         authoritiesUpdate.setRole((updateAuthorities).getRole());
         authoritiesService.update(authoritiesUpdate); // Assuming you have an update method in the productService
 		System.out.println("tới đây vẫn chạy");
-        return "redirect:/Gear/adminaccount"; // Redirect to the product list page
+        return "redirect:/Gear/Admin/adminaccount"; // Redirect to the product list page
     }
 }

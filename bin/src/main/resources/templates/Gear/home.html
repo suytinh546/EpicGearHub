@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+	<!--
+    <link rel="stylesheet" href="fontawesome-free-5.15.4-web/css/all.min.css">-->
+</head>
+
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+	<div class="container-fuild" style=" background-color:rgb(236,236,236);;">
+		<div class="row" style=" background-color: rgb(59, 45, 76) !important;">
+			<!-- image logo -->
+			<div class="col-3">
+				<div>
+					<a th:href="@{|/Gear/home|}">
+						<img class="img-responsive logoimg ls-is-cached lazyloaded"
+						src="/assets/imgproduct/2f7dde9f5c19456baa884724a1853109.png" alt="GEARVN.COM"
+						style="width: 40%;     margin-left: 170px;">
+					</a>
+					
+				</div>
+			</div>
+			<div class="col-4"></div>
+			<div class="col-5">
+				<div style="display: flex; margin-top: 20px;">
+					<!-- input search -->
+					<div style="display: flex;">
+						<div class="mb-3" style="width: 412px;">
+							<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Tìm kiếm">
+						</div>
+						<!-- icon search -->
+						<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"
+							style="font-size: 20px !important; margin: 10px; fill: white;"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+							<path
+								d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+						</svg>
+					</div>
+					<!-- cart -->
+					<div>
+						<a th:href="@{|/Gear/gh|}">
+							<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"
+								style="font-size: 20px !important; margin: 10px; fill: white;"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+								<path
+									d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+							</svg>
+						</a>
+					</div>
+					<!-- icon profile -->
+					<div class="dropdown" style="z-index: 50000;">
+						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false" style="background: rgb(59, 45, 76) !important; border: none;">
+							<svg xmlns="http://www.w3.org/2000/svg" height="1em" style="fill: white;"
+								viewBox="0 0 448 512">
+								<path
+									d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+							</svg>
+						</a>
+
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#">Login</a></li>
+							<li><a class="dropdown-item" href="#">Register Account</a></li>
+							<li><a class="dropdown-item" href="#">Logout</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- menu -->
+		<header class="sticky-top">
+			<div class="">
+				<div>
+					<nav class="nav nav-pills nav-justified"
+						style="height: 60px; align-items: center; background-color: white !important; font-size: 20px;">
+						<a class="nav-link text-black" th:href="@{|/Gear/home|}">Trang chủ</a>
+						<a class="nav-link text-black" th:href="@{|/Gear/list|}">Sản phẩm</a>
+						<a class="nav-link text-black" href="#">Chính sách bảo hành</a>
+						<a class="nav-link text-black" href="#">Về chúng tôi</a>
+					</nav>
+				</div>
+
+
+			</div>
+		</header>
+
+		<!-- carousel -->
+		<div style="margin-left: 250px; margin-right: 250px;">
+			<div class="row">
+				<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-indicators">
+						<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+							class="active" aria-current="true" aria-label="Slide 1"></button>
+						<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+							aria-label="Slide 2"></button>
+						<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+							aria-label="Slide 3"></button>
+					</div>
+					<div id="carouselExampleCaptions" class="carousel slide " data-bs-ride="carousel">
+						<div class="carousel-indicators">
+							<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+								class="active" aria-current="true" aria-label="Slide 1"></button>
+							<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+								aria-label="Slide 2"></button>
+							<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+								aria-label="Slide 3"></button>
+						</div>
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img src="https://hanoicomputercdn.com/media/banner/18_Novf39c98b85a19800722be8c61cb368cc5.png"
+									class="d-block w-100" alt="..." style="height: 500px;">
+								<div class="carousel-caption d-none d-md-block">
+								</div>
+							</div>
+							<div class="carousel-item">
+								<img src="https://file.hstatic.net/200000722513/file/slider__-_laptop_asus_expertbook_b1400ceae_bv3186w_0f907f4cc5e545e7a9800c03a0f44220.png"
+									class="d-block w-100" alt="..." style="height: 500px;">
+								<div class="carousel-caption d-none d-md-block">
+								</div>
+							</div>
+							<div class="carousel-item">
+								<img src="https://file.hstatic.net/200000722513/file/gearvn-dai-tiec-rog-san-qua-toi-tuf-slider_47335ea3529147b2a278a1975f2989b0.jpg"
+									class="d-block w-100" alt="..." style="height: 500px;">
+								<div class="carousel-caption d-none d-md-block">
+								</div>
+							</div>
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+							data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+							data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- carousel -->
+		
+		<div style="margin-left: 250px; margin-right: 250px;">
+			<!-- phan body -->
+			<div class="row">
+				
+				<!-- danh sach cpu -->
+				<div id="productContainer" class="row"
+					style="margin-top: 20px; background-color: white !important; padding-bottom: 20px;">
+					<h2>CPU</h2>
+					<div class="col-3 product-item" th:each="p : ${productcpu}">
+						<a th:href="@{|/Gear/product-detail/${p.id}|}" style="text-decoration: none; color: black;" onmouseover="this.style.color='Orange'" onmouseout="this.style.color='black'" onclick="this.style.color='pink'">
+						<div class="card h-100" style="width: 100%; height: auto;">
+							<img th:src="@{|/assets/imgproduct/${p.image}|}"  + class="card-img-top" alt="...">
+							<div class="card-body">
+								<h5 class="card-title">CPU - Bộ vi xử lý</h5>
+								<p class="card-text" th:text="${p.name}"></p>
+								<p style="font-size: 20px;font-weight: 600;line-height: 20px;color: #E30019;"
+									th:text="${p.price}"></p>
+								<a th:attr="ng-click=@{|cart.add(${p.id})|}" class="btn btn-primary">Thêm vào giỏ hàng
+								</a>
+							</div>
+						</div></a>
+					</div>
+					<div id="paginationButtons" style="margin-top: 10px;">
+						<button id="prevBtn" class="btn btn-primary">&lt;</button>
+						<button id="nextBtn" class="btn btn-primary">&gt;</button>
+					</div>
+				</div>
+				<!-- danh sach cpu -->
+
+			</div>
+			<!-- phan body -->
+		</div>
+		<!-- phaan footer -->
+		<footer style="margin-top: 50px;">
+			<div class="row item-menu" style="background: rgb(59, 45, 76) !important;">
+				<div class="col-12 col-sm-6 col-lg-3 text-white" style="padding-left: 200px;">
+					<h4 class="mt-4 mb-3">MENU</h4>
+					<p><i class="fas fa-angle-right"></i> Trang Chủ</p>
+					<p><i class="fas fa-angle-right"></i> Giới Thiệu</p>
+					<p><i class="fas fa-angle-right"></i> Liên Hệ</p>
+					<p><i class="fas fa-angle-right"></i> Góp Ý</p>
+				</div>
+				<div class="col-12 col-sm-6 col-lg-3 text-white" style="padding-left: 150px;">
+					<h4 class="mt-4 mb-3">CHÍNH SÁCH</h4>
+					<p><i class="fas fa-angle-right"></i> Chính sách bảo hành</p>
+					<p><i class="fas fa-angle-right"></i> Chính sách thanh toán</p>
+					<p><i class="fas fa-angle-right"></i> Chính sách giao hàng</p>
+					<p><i class="fas fa-angle-right"></i> Chính sách bảo mật</p>
+				</div>
+				<div class="col-12 col-sm-6 col-lg-3 text-white" style="padding-left: 145px;">
+					<h4 class="mt-4 mb-3">THÔNG TIN</h4>
+					<p><i class="fas fa-angle-right"></i> Hệ thống cửa hàng</p>
+					<p><i class="fas fa-angle-right"></i> Trung tâm bảo hành</p>
+				</div>
+				<div class="col-12 col-sm-6 col-lg-3 text-white">
+					<h4 class="mt-4 mb-3">Thông Tin Về Chúng Tôi</h4>
+					<p>Đây Là Một website cung Cấp Cho bạn linh kiện laptop</p>
+					<p>
+						<svg xmlns="http://www.w3.org/2000/svg" style="fill: white;" height="1em"
+							viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+							<path
+								d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" style="fill: white; margin-left: 10px;" height="1em"
+							viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+							<path
+								d="M223.69,141.06,167,284.23,111,141.06H14.93L120.76,390.19,82.19,480h94.17L317.27,141.06Zm105.4,135.79a58.22,58.22,0,1,0,58.22,58.22A58.22,58.22,0,0,0,329.09,276.85ZM394.65,32l-93,223.47H406.44L499.07,32Z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" style="fill: white; margin-left: 10px;" height="1em"
+							viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+							<path
+								d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" style="fill: white; margin-left: 10px;" height="1em"
+							viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+							<path
+								d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" style="fill: white; margin-left: 10px;" height="1em"
+							viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+							<path
+								d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" style="fill: white; margin-left: 10px;" height="1em"
+							viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+							<path
+								d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z" />
+						</svg>
+					</p>
+				</div>
+			</div>
+		</footer>
+
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<script src="/assets/js/shopping-cart-app.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var currentIndex = 0;
+        var itemsPerPage = 4;
+        var productItems = document.querySelectorAll('.product-item');
+        var productCount = productItems.length;
+
+        // Ẩn tất cả sản phẩm, chỉ hiển thị 4 sản phẩm đầu tiên
+        hideAllProducts();
+        showProducts(currentIndex);
+
+        // Bật/tắt nút Previous
+        function togglePrevButton() {
+            document.getElementById("prevBtn").disabled = currentIndex === 0;
+        }
+
+        // Bật/tắt nút Next
+        function toggleNextButton() {
+            document.getElementById("nextBtn").disabled = currentIndex + itemsPerPage >= productCount;
+        }
+
+        // Hiển thị sản phẩm từ startIndex đến endIndex
+        function showProducts(startIndex) {
+            hideAllProducts();
+            for (var i = startIndex; i < startIndex + itemsPerPage; i++) {
+                if (i < productCount) {
+                    productItems[i].style.display = "block";
+                }
+            }
+        }
+
+        // Ẩn tất cả sản phẩm
+        function hideAllProducts() {
+            productItems.forEach(function (item) {
+                item.style.display = "none";
+            });
+        }
+
+        // Kích thước nút Previous
+        document.getElementById("prevBtn").addEventListener("click", function () {
+            if (currentIndex > 0) {
+                currentIndex -= itemsPerPage;
+                showProducts(currentIndex);
+                togglePrevButton();
+                toggleNextButton();
+            }
+        });
+
+        // Kích thước nút Next
+        document.getElementById("nextBtn").addEventListener("click", function () {
+            if (currentIndex + itemsPerPage < productCount) {
+                currentIndex += itemsPerPage;
+                showProducts(currentIndex);
+                togglePrevButton();
+                toggleNextButton();
+            }
+        });
+
+        // Khởi tạo trạng thái ban đầu
+        togglePrevButton();
+        toggleNextButton();
+    });
+</script>
+</body>
+
+</html>
