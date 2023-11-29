@@ -55,6 +55,21 @@ public class ProductController {
 		System.out.println("tới đây vẫn chạy");
 		model.addAttribute("item",item);
 		return "Gear/ctsp";
+	}	
+	@RequestMapping("/Gear/product-detail/{id}")
+	public String productdetail(Model model,@PathVariable("id") Integer id) {
+		Product item = productService.findById(id);
+		System.out.println("tới đây vẫn chạy");
+		model.addAttribute("item",item);
+		return "Gear/product-detail";
+	}
+	@RequestMapping("/Gear/home")
+	public String home(Model model) {
+		List<Product> listcpu = productService.findByCategoryId("1");
+		model.addAttribute("productcpu",listcpu);
+		List<Product> listvga = productService.findByCategoryId("2");
+		model.addAttribute("productvga",listvga);
+		return "Gear/home";
 	}
 	@RequestMapping("/Gear/list")
 	public String phanloai(Model model, @RequestParam("cid")Optional<String> cid) {
@@ -86,7 +101,8 @@ public class ProductController {
 		String id="CUST";
 		Role rolecust = roleService.findById(id);
 		Authorities authorities = new Authorities();
-		authorities.setId(2);
+		List<Authorities> countautho = authodao.findAll();
+		authorities.setId(countautho.size()+1);
 		authorities.setAccount(account);
         authorities.setRole(rolecust);
         authodao.save(authorities);
