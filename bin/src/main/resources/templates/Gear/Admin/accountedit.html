@@ -1,4 +1,94 @@
 <!DOCTYPE html>
+<html lang="en" xmlns="http://thymeleaf.org/">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<link rel="stylesheet" href="fontawesome-free-5.15.4-web/css/all.min.css">
+</head>
+
+<body class="container-fuild" style=" background-color:rgb(236,236,236);">
+	<!-- header -->
+	<header class="sticky-top">
+        <div class="dropdown" style="z-index: 999;">
+            <div>
+                <nav class="nav nav-pills nav-justified"
+                    style="height: 100%; padding: 5px; align-items: center; background-color: white !important; font-size: 125%;">
+
+                    <a class="nav-link text-black" th:href="@{/Gear/Admin/adminaccount}">Tài khoản</a>
+
+                    <div class="nav-link">
+                        <a class="text-black text-decoration-none dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Sản phẩm
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/Gear/Admin/product-create}">Thêm sản phẩm</a></li>
+                            <li><a class="dropdown-item" th:href="@{/Gear/Admin/adminproduct}">Danh sách sản phẩm</a></li>
+                        </ul>
+                    </div>
+
+                    <a class="nav-link text-black" th:href="@{/Gear/Admin/admin-order}">Doanh thu</a>
+
+                    <a class="nav-link text-black" href="#">Thoát</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+	<!-- body -->
+	<div class="container my-3 py-3">
+		<div class="container-admin-create-product" style="margin-left: 25%; margin-right: 25%;">
+			<h2>Chỉnh sửa tài khoản</h2>
+			<form th:object="${authorities}" th:action="@{|/Gear/Admin/accountupdate/${authorities.account.username}|}"  method="post">
+
+				<div class="form-group m-2 fs-6 text-black-50 ">
+					<label>Tài khoản</label>
+					<input type="text" th:field="${authorities.account.username}" class="form-control" id="productName"
+						readonly>
+				</div>
+
+				<div class="form-group m-2 fs-6 text-black-50">
+					<label>Mật khẩu</label>
+					<input type="text" th:field="${authorities.account.password}" class="form-control" id="productPrice"
+						readonly>
+				</div>
+				<div class="form-group m-2 fs-6 text-black-50">
+					<label>Email</label>
+					<input type="text" th:field="${authorities.account.email}" class="form-control" id="productId"
+						readonly>
+				</div>
+
+				<div class="form-group m-2 fs-6 text-black-50">
+					<label>Quyền hạn</label>
+					<select class="form-control" th:field="${authorities.role.id}" id="role">
+						<option value="DIRE">Directors</option>
+						<option value="STAF">Staffs</option>
+						<option value="CUST">Customer</option>
+					</select>
+				</div>
+
+
+				<div class="form-group m-2">
+					<button type="submit" class=" text-white btn btn-primary btn-outline-info mt-3">Lưu thay
+						đổi</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
 <html xmlns="http://www.thymeleaf.org/">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -130,7 +220,7 @@
 		<div class="container">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form th:object="${authorities}" th:action="@{|/Gear/accountupdate/${authorities.account.username}|}"  method="post"
+					<form th:object="${authorities}" th:action="@{|/Gear/Admin/accountupdate/${authorities.account.username}|}"  method="post"
 						enctype="multipart/form-data">
 						<div class="panel panel-default">
 							<div class="panel-heading" style="margin: 20px;">ACCOUNT EDITION</div>
@@ -209,4 +299,5 @@
 
 <script src="bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/shopping-cart-app.js"></script>
-</body>
+</body> 
+-->

@@ -113,6 +113,18 @@ public class ProductController {
 		model.addAttribute("account", accountService.findById(request.getRemoteUser()));
 		return "Gear/doimk";
 	}
+	@RequestMapping("/Gear/product")
+	public String productlist(Model model, @RequestParam("cid")Optional<String> cid) {
+		if (cid.isPresent()) {
+			List<Product> list = productService.findByCategoryId(cid.get());
+			model.addAttribute("product",list);	
+		}
+		else{
+			List<Product> list = productService.findAll();
+			model.addAttribute("product",list);
+		}
+		return "Gear/product";
+	}
 	@PostMapping("/Gear/updatepass")
 	public String updatepass(HttpServletRequest request,@ModelAttribute("account") Account updateAccount) {
 		String username = request.getRemoteUser();

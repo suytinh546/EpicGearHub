@@ -1,4 +1,105 @@
 <!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org/">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<link rel="stylesheet" href="fontawesome-free-5.15.4-web/css/all.min.css">
+</head>
+
+<body style="background-color: rgb(236,236,236);">
+	<!-- header -->
+	<header class="sticky-top">
+        <div class="dropdown" style="z-index: 999;">
+            <div>
+                <nav class="nav nav-pills nav-justified"
+                    style="height: 100%; padding: 5px; align-items: center; background-color: white !important; font-size: 125%;">
+
+                    <a class="nav-link text-black" th:href="@{/Gear/Admin/adminaccount}">Tài khoản</a>
+
+                    <div class="nav-link">
+                        <a class="text-black text-decoration-none dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Sản phẩm
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/Gear/Admin/product-create}">Thêm sản phẩm</a></li>
+                            <li><a class="dropdown-item" th:href="@{/Gear/Admin/adminproduct}">Danh sách sản phẩm</a></li>
+                        </ul>
+                    </div>
+
+                    <a class="nav-link text-black" th:href="@{/Gear/Admin/admin-order}">Doanh thu</a>
+
+                    <a class="nav-link text-black" href="#">Thoát</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+	<!-- body -->
+	<div class="container my-3 py-3">
+		<div class="container-admin-create-product" style="margin-left: 25%; margin-right: 25%;">
+			<h2>Tạo sản phẩm</h2>
+			<form th:action="@{/Gear/Admin/create}" th:object="${product}" method="post">
+
+				<div class="form-group m-2 fs-6 text-black-50">
+					<label for="productName">Tên Sản phẩm</label>
+					<input type="text" class="form-control" th:field="*{name}" id="productName" placeholder="Nhập tên sản phẩm">
+				</div>
+
+				<div class="form-group m-2 fs-6 text-black-50">
+					<label for="productPrice">Giá</label>
+					<input type="number" class="form-control" th:field="*{price}" id="productPrice" placeholder="Nhập giá sản phẩm">
+				</div>
+				<div class="form-group m-2 fs-6 text-black-50">
+					<label for="productImage">Hình ảnh sản phẩm:</label>
+					<input type="file" class="form-control-file rounded-0" id="productImage">
+				</div>
+				<div class="form-group m-2 fs-6 text-black-50">
+					<label for="productType">Loại Sản phẩm:</label>
+					<select class="form-control" th:field="*{brand}" id="productType">
+						<option value="Corsair">Corsair</option>
+						<option value="Deepcool">Deepcool</option>
+						<option value="ASUS">ASUS</option>
+						<option value="MSI">MSI</option>
+						<option value="NZXT">NZXT</option>
+						<option value="GIGABYTE">GIGABYTE</option>
+						<option value="LEADTEK">LEADTEK</option>
+						<option value="AMD">AMD</option>
+						<option value="Intel">Intel</option>
+					</select>
+				</div>
+
+				<div class="form-group m-2 fs-6 text-black-50">
+					<label for="categoryId">CategoryID</label>
+					<select id="categoryId"  name="categoryId" th:field="*{category.id}" class="form-control" required>
+						<option value="1">CPU</option>
+						<option value="2">VGA</option>
+						<option value="3">Mainboard</option>
+						<option value="4">ROM</option>
+						<option value="5">RAM</option>
+						<option value="6">PSU</option>
+						<option value="7">Case</option>
+					</select>
+				</div>
+				<div class="form-group m-2">
+					<button type="submit" class=" text-white btn btn-primary btn-outline-info mt-3">Lưu Sản
+						phẩm</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
+<!--<!DOCTYPE html>
 <html xmlns="http://www.thymeleaf.org/">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -130,7 +231,7 @@
 		<div class="container">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form  th:object="${product}" th:action="@{|/Gear/update/${product.id}|}" method="post"
+					<form th:action="@{/Gear/create}" th:object="${product}" method="post"
 						enctype="multipart/form-data">
 						<div class="panel panel-default">
 							<div class="panel-heading" style="margin: 20px;">PRODUCT EDITION</div>
@@ -146,12 +247,12 @@
 										<div class="row">
 											<div class="form-group col-sm-6">
 												<label for="name">Name</label>
-												<input type="text" id="name" name="name" th:field="${product.name}"
+												<input type="text" id="name" name="name" th:field="*{name}"
 													class="form-control" required>
 											</div>
 											<div class="form-group col-sm-6">
 												<label for="price">Price</label>
-												<input type="text" id="price" name="price" th:field="${product.price}"
+												<input type="text" id="price" name="price" th:field="*{price}"
 													class="form-control" required>
 											</div>
 										</div>
@@ -160,8 +261,8 @@
 												
 											</div>
 											<div class="form-group col-sm-6">
-												<label for="brand">Thương Hiệu:</label>
-												<select id="brand" name="brand" th:field="${product.brand}" class="form-control"
+												<label for="brand">Brand:</label>
+												<select id="brand" name="brand" th:field="*{brand}" class="form-control"
 													required>
 													<option value="Corsair">Corsair</option>
 													<option value="Deepcool">Deepcool</option>
@@ -178,11 +279,10 @@
 										<div class="row">
 											<div class="form-group">
 												<label for="categoryId">CategoryID</label>
-												<select id="categoryId" name="categoryId" th:field="${product.category.name}"
+												<select id="categoryId" name="categoryId" th:field="*{category.id}"
 													class="form-control" required>
 													<option value="1">CPU</option>
 													<option value="2">VGA</option>
-
 													<option value="3">Mainboard</option>
 													<option value="4">ROM</option>
 													<option value="5">RAM</option>
@@ -195,15 +295,8 @@
 								</div>
 							</div>
 							<div class="panel-footer text-center">
-							
-								<button  type="submit" ng-click="update()" ng-disabled="!form.id" class="btn btn-success">
-									<b class="glyphicon glyphicon-save"></b> Update
-								</button>
-								<button ng-click="delete(form)" ng-disabled="!form.id" class="btn btn-danger">
-									<b class="glyphicon glyphicon-trash"></b> Delete
-								</button>
-								<button ng-click="reset()" class="btn btn-info">
-									<b class="glyphicon glyphicon-refresh"></b> Reset
+								<button type="submit" class="btn btn-primary">
+									<b class="glyphicon glyphicon-plus"></b> Create
 								</button>
 							</div>
 					</form>
@@ -248,3 +341,4 @@
 <script src="bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/shopping-cart-app.js"></script>
 </body>
+-->

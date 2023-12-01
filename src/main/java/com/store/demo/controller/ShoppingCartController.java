@@ -9,4 +9,8 @@ public class ShoppingCartController {
 	public String gh() {
 		return "Gear/gh";
 	}
+	@RequestMapping("/Gear/list-cart")
+	public String listcart() {
+		return "Gear/list-cart";
+	}
 }
