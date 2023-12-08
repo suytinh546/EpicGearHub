@@ -104,30 +104,6 @@ public class ProductController {
 		model.addAttribute("product",list);
 		return "Gear/product";
 	}
-	@RequestMapping("/Gear/user-create")
-	public String dangky(Model model ) {
-		Account account = new Account();
-		model.addAttribute("account",account);
-		return "Gear/user-create";
-	}
-	@PostMapping("/Gear/usercreate")
-	public String dangky(@ModelAttribute("account") Account account ) {
-		accountService.create(account);
-		String id="CUST";
-		Role rolecust = roleService.findById(id);
-		Authorities authorities = new Authorities();
-		List<Authorities> countautho = authodao.findAll();
-		authorities.setId(countautho.size()+1);
-		authorities.setAccount(account);
-        authorities.setRole(rolecust);
-        authodao.save(authorities);
-		return "Gear/login";
-	}
-	@RequestMapping("/Gear/doimk")
-	public String doimk(Model model,HttpServletRequest request ) {
-		model.addAttribute("account", accountService.findById(request.getRemoteUser()));
-		return "Gear/doimk";
-	}
 	@RequestMapping("/Gear/product")
 	public String productlist(Model model, @RequestParam("cid")Optional<String> cid) {
 		if (cid.isPresent()) {
@@ -140,25 +116,6 @@ public class ProductController {
 		}
 		return "Gear/product";
 	}
-	@PostMapping("/Gear/updatepass")
-	public String updatepass(Model model,HttpServletRequest request,@ModelAttribute("account") Account updateAccount,@RequestParam("password")String password,@RequestParam("newpassword1")String newpassword1,@RequestParam("newpassword2")String newpassword2 ) {
-		String username = request.getRemoteUser();
-		Account account = accountService.findById(username);
-		if(account.getPassword().equals(password)) {
-			if(newpassword1.equals(newpassword2)) {
-				account.setPassword(newpassword2);
-				accountService.update(account);
-				model.addAttribute("message", "Đổi mật khẩu thành công");
-				return "Gear/doimksuccess"; 
-			}else{
-				model.addAttribute("message", "Mật khẩu mới không trùng khớp! vui lòng nhập lại");
-				return "Gear/doimksuccess"; 
-			}
-		}else {
-			model.addAttribute("message", "Mật khẩu cũ không đúng! vui lòng nhập lại");
-			return "Gear/doimksuccess"; 
-		}
-	}
 	
 	@RequestMapping("/Gear/about")
 	public String about() {
@@ -168,23 +125,5 @@ public class ProductController {
 	@RequestMapping("/Gear/news")
 	public String news() {
 		return "Gear/news";
-	}
-	@RequestMapping("/Gear/forgotpass")
-	public String forgotpass() {	
-		return "Gear/forgotpass";
-	}
-	@PostMapping("/Gear/forgotpass/sendtemppassword")
-	public String sendtempassword(Model model,@RequestParam("username")String username) {
-			Account account = accountService.findById(username);
-			if(account==null) {
-				model.addAttribute("message", "Không tìm thấy tài khoản của bạn");
-				return "Gear/forgotpass"; 
-			}else {
-				account.setPassword("123456");
-				accountService.update(account);
-				myemailservice.sendEmail(account.getEmail(), "Mật khẩu tạm", "mật khẩu tạm của bạn là: 123456");
-			}
-			model.addAttribute("message", "Mật khẩu cũ không đúng! vui lòng nhập lại");
-			return "Gear/doimksuccess"; 
 	}
 }

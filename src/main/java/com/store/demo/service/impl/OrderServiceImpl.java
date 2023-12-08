@@ -3,15 +3,18 @@ package com.store.demo.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.store.demo.DAO.AccountDAO;
 import com.store.demo.DAO.OrderDAO;
 import com.store.demo.DAO.OrderDetailDAO;
+import com.store.demo.entity.Account;
 import com.store.demo.entity.Order;
 import com.store.demo.entity.OrderDetail;
 import com.store.demo.service.OrderService;
@@ -20,14 +23,18 @@ import com.store.demo.service.OrderService;
 public class OrderServiceImpl implements OrderService{
 	@Autowired
 	OrderDAO dao;
+	@Autowired
+	AccountDAO adao;
 	
 	@Autowired
 	OrderDetailDAO ddao;
 	
 	public Order create(JsonNode orderData) {
+		
 		ObjectMapper mapper = new ObjectMapper();
 		
 		Order order = mapper.convertValue(orderData, Order.class);
+		adao.save(order.getAccount());
 		dao.save(order);
 		
 		TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {};
