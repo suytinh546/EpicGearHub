@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.thymeleaf.org/">
+<html lang="en" xmlns="http://thymeleaf.org/">
 
 <head>
 	<meta charset="UTF-8">
@@ -7,10 +7,9 @@
 	<title>Document</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-	<link rel="stylesheet" href="fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
-<body style="background-color: rgb(236,236,236);">
+<body class="container-fuild p-0 m-0" style=" background-color:rgb(236,236,236);">
 	<!-- header -->
 	<header class="sticky-top">
 		<div class="dropdown" style="z-index: 999;">
@@ -34,66 +33,73 @@
 
 					<a class="nav-link text-black" th:href="@{/Gear/Admin/admin-order}">Doanh thu</a>
 
-					<a class="nav-link text-black" th:href="@{/Gear/home}">Thoát</a>
+					<a class="nav-link text-black" th:href="@{/Gear/index}">Thoát</a>
 				</nav>
 			</div>
 		</div>
 	</header>
+
 	<!-- body -->
-	<div class="container my-3 py-3">
-		<div class="container-admin-create-product" style="margin-left: 25%; margin-right: 25%;">
-			<h2>Tạo sản phẩm</h2>
-			<form th:action="@{/Gear/Admin/create}" th:object="${product}" method="post" enctype="multipart/form-data">
+	<div class="container my-3">
+		<div style="margin: 2% 20%;">
+			<div class="card" style="text-align: center;">
+				<h3 class="card-header">Thêm sản phẩm</h3>
+				<div class="card-body" style="text-align: left;">
+					<form th:action="@{/Gear/Admin/create}" th:object="${product}" method="post"
+						enctype="multipart/form-data">
 
-				<div class="form-group m-2 fs-6 text-black-50">
-					<label for="productName">Tên Sản phẩm</label>
-					<input type="text" class="form-control" th:field="*{name}" id="productName"
-						placeholder="Nhập tên sản phẩm">
-				</div>
+						<div class="form-group m-2 fs-6 text-black-50">
+							<label for="productName">Tên Sản phẩm</label>
+							<input type="text" class="form-control" th:field="*{name}" id="productName"
+								placeholder="Nhập tên sản phẩm">
+						</div>
 
-				<div class="form-group m-2 fs-6 text-black-50">
-					<label for="productPrice">Giá</label>
-					<input type="number" class="form-control" th:field="*{price}" id="productPrice"
-						placeholder="Nhập giá sản phẩm">
-				</div>
-				<div class="form-group">
-					<label for="file">Choose File:</label>
-					<input type="file" name="file" id="file" class="form-control-file"
-						accept=".txt, .pdf, .doc, .docx, .jpg">
-				</div>
-				<div class="form-group m-2 fs-6 text-black-50">
-					<label for="productType">Loại Sản phẩm:</label>
-					<select class="form-control" th:field="*{brand}" id="productType">
-						<option value="Corsair">Corsair</option>
-						<option value="Deepcool">Deepcool</option>
-						<option value="ASUS">ASUS</option>
-						<option value="MSI">MSI</option>
-						<option value="NZXT">NZXT</option>
-						<option value="GIGABYTE">GIGABYTE</option>
-						<option value="LEADTEK">LEADTEK</option>
-						<option value="AMD">AMD</option>
-						<option value="Intel">Intel</option>
-					</select>
-				</div>
+						<div class="form-group m-2 fs-6 text-black-50">
+							<label for="productPrice">Giá</label>
+							<input type="number" class="form-control" th:field="*{price}" id="productPrice"
+								placeholder="Nhập giá sản phẩm">
+						</div>
+						<div class="form-group m-2 py-3">
+							<label for="file">Choose File:</label>
+							<input type="file" name="file" id="file" class="form-control-file"
+								accept=".txt, .pdf, .doc, .docx, .jpg">
+						</div>
+						<div class="form-group m-2 fs-6 text-black-50">
+							<label for="productType">Loại Sản phẩm:</label>
+							<select class="form-control" th:field="*{brand}" id="productType">
+								<option value="Corsair">Corsair</option>
+								<option value="Deepcool">Deepcool</option>
+								<option value="ASUS">ASUS</option>
+								<option value="MSI">MSI</option>
+								<option value="NZXT">NZXT</option>
+								<option value="GIGABYTE">GIGABYTE</option>
+								<option value="LEADTEK">LEADTEK</option>
+								<option value="AMD">AMD</option>
+								<option value="Intel">Intel</option>
+							</select>
+						</div>
 
-				<div class="form-group m-2 fs-6 text-black-50">
-					<label for="categoryId">CategoryID</label>
-					<select id="categoryId" name="categoryId" th:field="*{category.id}" class="form-control" required>
-						<option value="1">CPU</option>
-						<option value="2">VGA</option>
-						<option value="3">Mainboard</option>
-						<option value="4">ROM</option>
-						<option value="5">RAM</option>
-						<option value="6">PSU</option>
-						<option value="7">Case</option>
-					</select>
-				</div>
-				<div class="form-group m-2">
-					<button type="submit" class=" text-white btn btn-primary btn-outline-info mt-3">Lưu Sản
-						phẩm</button>
-				</div>
+						<div class="form-group m-2 fs-6 text-black-50">
+							<label for="categoryId">CategoryID</label>
+							<select id="categoryId" name="categoryId" th:field="*{category.id}" class="form-control"
+								required>
+								<option value="1">CPU</option>
+								<option value="2">VGA</option>
+								<option value="3">Mainboard</option>
+								<option value="4">ROM</option>
+								<option value="5">RAM</option>
+								<option value="6">PSU</option>
+								<option value="7">Case</option>
+							</select>
+						</div>
+						<div class="form-group m-2">
+							<button type="submit" class=" text-white btn btn-primary btn-outline-info mt-3">Lưu Sản
+								phẩm</button>
+						</div>
 
-			</form>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 

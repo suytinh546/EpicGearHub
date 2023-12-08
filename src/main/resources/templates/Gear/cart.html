@@ -101,169 +101,78 @@
 		</div>
 	</div>
 
-
-	<div class="container">
-		<!-- body -->
-		<div class="row my-4 rounded-3 bg-white" style="
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); margin: 0 5%;">
-			<div class="col-4">
-				<img th:src="@{|/assets/imgproduct/${item.image}|}" style="width: 100%;" alt="#">
-			</div>
-			<div class="col-6 m-3">
-				<h5>[[${item.name}]]</h5>
-				<div style="    padding: 20px 10px;
-                                    margin-bottom: 20px;
-                                    border-radius: 5px;
-                                    border: 1px dashed #ddd;
-                                    margin-top: 30px;">
-					<p class="fs-4 text-danger fw-bold">
-						[[${item.price}]] $
-					</p>
-					<div style="display: flex;">
-						<div style="background: #f5f5f5;
-                                        font-size: 13px;
-                                        font-weight: 500;
-                                        padding: 3px 5px;
-                                        border-radius: 3px;
-                                        margin-right: 10px;">
-							Giá đã có VAT
-						</div>
-
-						<div style="background: #f5f5f5;
-                                        font-size: 13px;
-                                        font-weight: 500;
-                                        padding: 3px 5px;
-                                        border-radius: 3px;
-                                        margin-right: 10px;">
-							Bảo hành 36 Tháng
-						</div>
+	<!-- body -->
+	<div class="container my-3">
+		<div style="margin: 2% 8%;">
+			<div class="card" style="text-align: center;">
+				<h3 class="card-header">Danh sách đơn đặt
+					hàng của bạn</h3>
+				<div class="card-body" style="text-align: left;">
+					<div class="row">
+						<table class="table table-hover" ng-if="cart.items.length">
+							<thead style="height: 50px !important; text-transform: uppercase;">
+								<tr>
+									<th>Sản phẩm</th>
+									<th>Giá</th>
+									<th>Số lượng</th>
+									<th>Tổng</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in cart.items">
+									<td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+										<img ng-src="/assets/imgproduct/{{item.image}}" style="width: 50px;" alt="">
+										{{item.name}}
+									</td>
+									<td>${{item.price | number : 2}}</td>
+									<td><input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" type="number"
+											min="1"></td>
+									<td>{{cart.amt_of(item) | number : 2}}</td>
+									<td><button ng-click="cart.remove(item.id)"
+											class="btn btn-sm btn-light btn-outline-danger">
+											<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+												<path
+													d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+											</svg>
+										</button>
+								</tr>
+							</tbody>
+						</table>
 					</div>
-				</div>
-				<div style="display: flex; justify-content: space-between;">
-					<div style="display: flex;">
-						<p style="font-size: 20px;">Số lượng: </p>
-						<input type="number" min="0" value="1" style="height: 30px; margin-left: 27px; width: 30%;">
-					</div>
-
-					<div type="button" class="btn btn-outline-secondary" style="margin-left: 50px;">
-						<svg xmlns="http://www.w3.org/2000/svg" height="1em" style="fill: gray;" viewBox="0 0 576 512">
-							<path
-								d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-						</svg>
-						<a th:attr="ng-click=@{|cart.add(${item.id})|}"  style="padding-left: 7px;">Thêm vào giỏ hàng</a>
-					</div>
-				</div>
-				<div class="div" style="margin-top: 30px;">
-					<div class="card">
-						<div class="card-header">
-							<h5 style="font-weight: 700;color: #ed1b24; font-size: 17px;"> Quà tặng và ưu đãi kèm
-								theo</h5>
-						</div>
-						<div class="card-body">
-							<span style="margin-bottom: 0;
-                                            font-size: 14px;
-                                            font-weight: 700;
-                                            color: #e51d24;">
-								Cam kết giá tốt nhất thị trường, liên hệ 19001903 hoặc đến tận nơi để có giá tốt
-								nhất!
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-2">
-
-			</div>
-		</div>
-
-		<!--		<div class="row" style="margin-top: 50px; background-color:rgb(255, 255, 255);">
-			<h2>CPU</h2>
-			<div class="col-3">
-				<div class="card h-100" style="width: 100%;">
-					<img src="https://hanoicomputercdn.com/media/product/250_64780_cpu_intel_pentium_gold_g7400.jpg"
-						class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">CPU - Bộ vi xử lý</h5>
-						<p class="card-text">CPU INTEL CORE I7-12700K (3.8GHZ TURBO UP TO 5.0GHZ, 12 NHÂN 20 LUỒNG,
-							25MB CACHE, 125W) - SOCKET INTEL LGA 1700/ALDER LAKE)</p>
-						<p style="font-size: 20px;font-weight: 600;line-height: 20px;color: #E30019;">25.000.000 đ
-						</p>
-						<a href="#" class="btn btn-primary">Thêm vào giỏ hàng </a>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="card h-100" style="width: 100%;">
-					<img src="https://hanoicomputercdn.com/media/product/250_52618_intel_g6400.jpg" class="card-img-top"
-						alt="...">
-					<div class="card-body">
-						<h5 class="card-title">CPU - Bộ vi xử lý</h5>
-						<p class="card-text">CPU INTEL CORE I9-13900K (UP TO 5.8GHZ, 24 NHÂN 32 LUỒNG, 36MB CACHE,
-							125W) - SOCKET INTEL LGA 1700/RAPTOR LAKE</p>
-						<p style="font-size: 20px;font-weight: 600;line-height: 20px;color: #E30019;">25.000.000 đ
-						</p>
-						<a href="#" class="btn btn-primary">Thêm vào giỏ hàng </a>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="card h-100" style="width: 100%;">
-					<img src="https://hanoicomputercdn.com/media/product/250_65712_cpu_intel_xeon_w_1350p_4_0ghz_turbo_up_to_5__2_.jpg"
-						class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">CPU - Bộ vi xử lý</h5>
-						<p class="card-text">CPU INTEL CORE I9-10900X (3.5GHZ TURBO UP TO 4.5GHZ, 10 NHÂN, 20 LUỒNG,
-							19.25 MB CACHE, 165W) - SOCKET INTEL LGA 2066)</p>
-						<p style="font-size: 20px;font-weight: 600;line-height: 20px;color: #E30019;">25.000.000 đ
-						</p>
-						<a href="#" class="btn btn-primary">Thêm vào giỏ hàng </a>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="card h-100" style="width: 100%;">
-					<img src="https://hanoicomputercdn.com/media/product/250_61450_cpu_intel_core_i9_12900k_3_9ghz_turbo_up_to_5_2ghz_16_nhan_24_luong_30mb_cache_125w_socket_intel_lga_1700_alder_lake_i4.jpg"
-						class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">CPU - Bộ vi xử lý</h5>
-						<p class="card-text">CPU INTEL CORE I9-12900K (3.2GHZ TURBO UP TO 5.2GHZ, 16 NHÂN 24 LUỒNG,
-							30MB CACHE, 125W) - SOCKET INTEL LGA 1700/ALDER LAKE)</p>
-						<p style="font-size: 20px;font-weight: 600;line-height: 20px;color: #E30019;">25.000.000 đ
-						</p>
-						<a href="#" class="btn btn-primary">Thêm vào giỏ hàng </a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>-->
-		<!-- product list -->
-		<div class="row p-3 rounded-3" style="margin: 2% 8%; background-color: white !important;">
-			<h2>Sản phẩm mới</h2>
-			<div class="col-12 col-md-3 product-item" th:each="item : ${productcpu}">
-				<a th:href="@{|/Gear/product-detail/${item.id}|}" style="text-decoration: none; color: black;"
-					onmouseover="this.style.color='Orange'" onmouseout="this.style.color='black'"
-					onclick="this.style.color='pink'">
-					<div class="card h-100" style="width: 100%; height: auto;">
-						<img th:src="@{|/assets/imgproduct/${item.image}|}" + class="card-img-top" alt="#">
-						<div class="card-body">
-							<h5 class="card-title">CPU - Bộ vi xử lý</h5>
-							<p class="card-text text-truncate" th:text="${item.name}"></p>
-							<p class="fs-4 text-danger fw-bold" th:text="${item.price}"></p>
-							<a th:attr="ng-click=@{|cart.add(${item.id})|}"
-								class="btn btn-dark opacity-50 btn-outline-light">Thêm vào giỏ
-								hàng
+					<!--<button ng-click="cart.clear()" class="btn btn-danger">
+						<i class="glyphicon glyphicon-trash"></i> Clear
+					</button>-->
+					<div style="display: flex; justify-content: space-between;">
+						<div>
+							<a th:href="@{/Gear/order/checkout}" class="btn btn-light">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+									fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
+									stroke-linejoin="round">
+									<rect x="2" y="4" width="20" height="16" rx="2" />
+									<path d="M7 15h0M2 9.5h20" />
+								</svg> Thanh toán
 							</a>
 						</div>
+						<a th:href="@{/Gear/order/checkoutpaypal}" class="btn btn-light">
+							PAYPAL
+						</a>
 					</div>
-				</a>
+				</div>
 			</div>
-			<div id="paginationButtons" class="my-3">
-				<button id="prevBtn" class="btn btn-dark opacity-50 btn-outline-light">&lt;</button>
-				<button id="nextBtn" class="btn btn-dark opacity-50 btn-outline-light">&gt;</button>
+			<div class="my-3">
+				<a th:href="@{/Gear/product}" class="text-decoration-none text-black" style="cursor: pointer;">
+					<svg xmlns="http://www.w3.org/2000/svg" style="padding-right: 10px;" height="1em"
+						viewBox="0 0 512 512">
+						<path
+							d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288 480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 73.4-73.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-128 128z" />
+					</svg>
+					Tiếp tục mua hàng
+				</a>
 			</div>
 		</div>
 	</div>
-
+	
 	<!-- footer -->
 	<footer>
 		<div class="row item-menu bg-black" style="margin-top: 50px;">
@@ -329,70 +238,6 @@
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
 	<script src="/assets/js/shopping-cart-app.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			var currentIndex = 0;
-			var itemsPerPage = 4;
-			var productItems = document.querySelectorAll('.product-item');
-			var productCount = productItems.length;
-
-			// Ẩn tất cả sản phẩm, chỉ hiển thị 4 sản phẩm đầu tiên
-			hideAllProducts();
-			showProducts(currentIndex);
-
-			// Bật/tắt nút Previous
-			function togglePrevButton() {
-				document.getElementById("prevBtn").disabled = currentIndex === 0;
-			}
-
-			// Bật/tắt nút Next
-			function toggleNextButton() {
-				document.getElementById("nextBtn").disabled = currentIndex + itemsPerPage >= productCount;
-			}
-
-			// Hiển thị sản phẩm từ startIndex đến endIndex
-			function showProducts(startIndex) {
-				hideAllProducts();
-				for (var i = startIndex; i < startIndex + itemsPerPage; i++) {
-					if (i < productCount) {
-						productItems[i].style.display = "block";
-					}
-				}
-			}
-
-			// Ẩn tất cả sản phẩm
-			function hideAllProducts() {
-				productItems.forEach(function (item) {
-					item.style.display = "none";
-				});
-			}
-
-			// Kích thước nút Previous
-			document.getElementById("prevBtn").addEventListener("click", function () {
-				if (currentIndex > 0) {
-					currentIndex -= itemsPerPage;
-					showProducts(currentIndex);
-					togglePrevButton();
-					toggleNextButton();
-				}
-			});
-
-			// Kích thước nút Next
-			document.getElementById("nextBtn").addEventListener("click", function () {
-				if (currentIndex + itemsPerPage < productCount) {
-					currentIndex += itemsPerPage;
-					showProducts(currentIndex);
-					togglePrevButton();
-					toggleNextButton();
-				}
-			});
-
-			// Khởi tạo trạng thái ban đầu
-			togglePrevButton();
-			toggleNextButton();
-		});
-	</script>
 </body>
 
 </html>

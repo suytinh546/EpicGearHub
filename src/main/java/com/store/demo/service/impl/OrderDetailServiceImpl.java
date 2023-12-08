@@ -18,4 +18,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		// TODO Auto-generated method stub
 		return ddao.findAll();
 	}
+	@Override
+	public List<OrderDetail> findByOrderId(Integer id) {
+		// TODO Auto-generated method stub
+		return ddao.findByOrderId(id);
+	}
 }

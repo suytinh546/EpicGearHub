@@ -7,37 +7,37 @@
 	<title>Document</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-	<link rel="stylesheet" href="fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
-<body style="background-color: rgb(236,236,236);">
+<body class="container-fuild p-0 m-0" style=" background-color:rgb(236,236,236);">
 	<!-- header -->
 	<header class="sticky-top">
-        <div class="dropdown" style="z-index: 999;">
-            <div>
-                <nav class="nav nav-pills nav-justified"
-                    style="height: 100%; padding: 5px; align-items: center; background-color: white !important; font-size: 125%;">
+		<div class="dropdown" style="z-index: 999;">
+			<div>
+				<nav class="nav nav-pills nav-justified"
+					style="height: 100%; padding: 5px; align-items: center; background-color: white !important; font-size: 125%;">
 
-                    <a class="nav-link text-black" th:href="@{/Gear/Admin/adminaccount}">Tài khoản</a>
+					<a class="nav-link text-black" th:href="@{/Gear/Admin/adminaccount}">Tài khoản</a>
 
-                    <div class="nav-link">
-                        <a class="text-black text-decoration-none dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Sản phẩm
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/Gear/Admin/product-create}">Thêm sản phẩm</a></li>
-                            <li><a class="dropdown-item" th:href="@{/Gear/Admin/adminproduct}">Danh sách sản phẩm</a></li>
-                        </ul>
-                    </div>
+					<div class="nav-link">
+						<a class="text-black text-decoration-none dropdown-toggle" href="#" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							Sản phẩm
+						</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" th:href="@{/Gear/Admin/product-create}">Thêm sản phẩm</a></li>
+							<li><a class="dropdown-item" th:href="@{/Gear/Admin/adminproduct}">Danh sách sản phẩm</a>
+							</li>
+						</ul>
+					</div>
 
-                    <a class="nav-link text-black" th:href="@{/Gear/Admin/admin-order}">Doanh thu</a>
+					<a class="nav-link text-black" th:href="@{/Gear/Admin/admin-order}">Doanh thu</a>
 
-                    <a class="nav-link text-black" th:href="@{/Gear/home}">Thoát</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+					<a class="nav-link text-black" th:href="@{/Gear/index}">Thoát</a>
+				</nav>
+			</div>
+		</div>
+	</header>
 
 	<!-- body -->
 	<div class="container my-3 py-3">

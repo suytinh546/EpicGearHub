@@ -1,34 +1,155 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org/">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tạo mới người dùng</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>EpicGear</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
-<body>
 
-<div class="container mt-5">
-    <h2>SIGN UP</h2>
-    <form th:action="@{/Gear/usercreate}" th:object="${account}" method="post">
-        <!-- Tên người dùng -->
-        <div class="mb-3">
-            <label for="username" class="form-label">Tên người dùng</label>
-            <input type="text" class="form-control" th:field="*{username}" id="username" placeholder="Nhập tên người dùng">
-        </div>
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl" class="container-fluid m-0 p-0"
+	style="background-color: rgb(236,236,236);">
+	<!-- header -->
+	<header>
+		<div class="row bg-black">
+			<!-- logo -->
+			<div class="col-12 col-md-1"></div>
+			<div class="col-12 col-md-1">
+				<a th:href="@{|/Gear/index|}">
+					<img class="img-responsive ls-is-cached lazyloaded w-100 mt-2" src="/assets/imgproduct/logo.png"
+						alt="#">
+				</a>
+			</div>
+			<div class="col-12 col-md-6"></div>
+			<div class="col-12 col-md-4">
+				<div class="pt-3 h-75" style="display: flex">
+					<!-- input search -->
+					<div>
+						<form method="get" th:action="@{/Gear/search}">
+							<div class="row">
+								<div class="col-9">
+									<input type="text" class="form-control" name="searchValue"
+										id="formGroupExampleInput" placeholder="Tìm kiếm">
+								</div>
+								<!-- icon search -->
+								<div class="col-3">
+									<button type="submit" style="background-color: black; border: none;">
+										<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"
+											style="font-size: 20px !important; margin: 10px; fill: white;"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+											<path
+												d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+										</svg>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					
+					<!-- cart -->
+					<div>
+						<a th:href="@{|/Gear/cart|}">
+							<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"
+								style="font-size: 20px !important; margin: 10px; fill: white;"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+								<path
+									d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+							</svg>
+						</a>
+					</div>
+					<!-- icon profile -->
+					<div class="dropdown" style="z-index: 99999;">
+						<a class="btn btn-secondary" href="#" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false" style="background: black !important; border: none;">
+							<svg xmlns="http://www.w3.org/2000/svg" height="1em" style="fill: white;"
+								viewBox="0 0 448 512">
+								<path
+									d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+							</svg>
+						</a>
+						<ul class="dropdown-menu">
+							<th:block th:unless="${#request.remoteUser}">
+								<li><a class="dropdown-item" th:href="@{/Gear/login/form}">Đăng nhập</a></li>
+								<li><a class="dropdown-item" th:href="@{/Gear/user-create}">Đăng ký</a></li>
+							</th:block>
+							<th:block th:if="${#request.remoteUser}">
+								<li><a class="dropdown-item" th:href="@{/Gear/logoff}">Đăng xuất</a></li>
+								<li><a class="dropdown-item" th:href="@{/Gear/doimk}">Đổi mật khẩu</a></li>
 
-        <!-- Mật khẩu -->
-        <div class="mb-3">
-            <label for="password" class="form-label">Mật khẩu</label>
-            <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Nhập mật khẩu">
-        </div>
+								<li><a class="dropdown-item" th:href="@{/Gear/order/list}">Nhật ký mua hàng</a></li>
+								<li><a class="dropdown-item"
+										th:if="${#request.isUserInRole('DIRE')or#request.isUserInRole('STAF')}"
+										th:href="@{/Gear/Admin/adminproduct}">Chế độ quản trị viên</a></li>
+							</th:block>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- menu -->
+	<div class="sticky-top">
+		<div class="border-bottom border-top">
+			<nav class="nav nav-pills nav-justified fs-5"
+				style="align-items: center; background-color: white !important;">
+				<a class="nav-link text-black" th:href="@{|/Gear/index|}">Trang chủ</a>|
+				<a class="nav-link text-black" th:href="@{|/Gear/product|}">Sản phẩm</a>|
+				<a class="nav-link text-black" th:href="@{|/Gear/news|}">Tin công nghệ</a>|
+				<a class="nav-link text-black" th:href="@{|/Gear/about|}">Về chúng tôi</a>
+			</nav>
+		</div>
+	</div>
 
-        <!-- Nút Đăng ký -->
-        <button type="submit" class="btn btn-primary">Đăng ký</button>
-    </form>
-</div>
+	<!-- body -->
+	<div class="container">
+		<div class="card" style="margin: 2% 35%;">
+			<div class="card-header fs-5" style="text-align: center;">
+				Đăng ký
+			</div>
+			<div class="container p-3">
+				<form th:action="@{/Gear/usercreate}" th:object="${account}" method="post">
+					<div class="m-4">
+						<input type="text" class="form-control" th:field="*{username}" id="username"
+							placeholder="Nhập tên người dùng">
+					</div>
+					<div class="m-4">
+						<input type="password" class="form-control" th:field="*{password}" id="password"
+							placeholder="Nhập mật khẩu">
+					</div>
+					<div class="mx-4  checkbox-inline">
+						<input type="text" class="form-control" th:field="*{email}" id="text"
+							placeholder="Nhập email đăng ký">
+					</div>
+					<div class="m-3" style="text-align: center;">
+						<i class="pull-left text-danger" th:text="${message}"></i>
+					</div>
+					<div class="m-3" style="text-align: center;">
+						<button type="submit" class="btn btn-dark border-1 mx-3 px-5"><a
+								class="text-decoration-none text-white">Đăng
+								ký</a></button>
+					</div>
+					<div class="m-3" style="text-align: center;">
+						Đã có tài khoản?, quay lại
+						<a class="text-decoration-none text-black link-primary" th:href="@{/Gear/login/form}">Đăng
+							nhập</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
-<!-- Bao gồm Bootstrap JS và Popper.js (được yêu cầu bởi Bootstrap) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- footer -->
+	<footer class="sticky-bottom">
+		<div class="row item-menu bg-black" style="height: 80px; margin-top: 110px;">
+
+		</div>
+	</footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<script src="/assets/js/shopping-cart-app.js"></script>
 </body>
+
 </html>

@@ -13,4 +13,6 @@ import com.store.demo.entity.OrderDetail;
 public interface OrderDetailService {
 	
 	public List<OrderDetail> findAll();
+
+	public List<OrderDetail> findByOrderId(Integer id);
 }

@@ -1,86 +1,104 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.thymeleaf.org/">
+<html lang="en" xmlns="http://thymeleaf.org/">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="fontawesome-free-5.15.4-web/css/all.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-<body style="background-color: rgb(236,236,236);">
-    <!-- header -->
+<body class="container-fuild p-0 m-0" style=" background-color:rgb(236,236,236);">
+	<!-- header -->
 	<header class="sticky-top">
-        <div class="dropdown" style="z-index: 999;">
-            <div>
-                <nav class="nav nav-pills nav-justified"
-                    style="height: 100%; padding: 5px; align-items: center; background-color: white !important; font-size: 125%;">
+		<div class="dropdown" style="z-index: 999;">
+			<div>
+				<nav class="nav nav-pills nav-justified"
+					style="height: 100%; padding: 5px; align-items: center; background-color: white !important; font-size: 125%;">
 
-                    <a class="nav-link text-black" th:href="@{/Gear/Admin/adminaccount}">Tài khoản</a>
+					<a class="nav-link text-black" th:href="@{/Gear/Admin/adminaccount}">Tài khoản</a>
 
-                    <div class="nav-link">
-                        <a class="text-black text-decoration-none dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Sản phẩm
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/Gear/Admin/product-create}">Thêm sản phẩm</a></li>
-                            <li><a class="dropdown-item" th:href="@{/Gear/Admin/adminproduct}">Danh sách sản phẩm</a></li>
-                        </ul>
-                    </div>
+					<div class="nav-link">
+						<a class="text-black text-decoration-none dropdown-toggle" href="#" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							Sản phẩm
+						</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" th:href="@{/Gear/Admin/product-create}">Thêm sản phẩm</a></li>
+							<li><a class="dropdown-item" th:href="@{/Gear/Admin/adminproduct}">Danh sách sản phẩm</a>
+							</li>
+						</ul>
+					</div>
 
-                    <a class="nav-link text-black" th:href="@{/Gear/Admin/admin-order}">Doanh thu</a>
+					<a class="nav-link text-black" th:href="@{/Gear/Admin/admin-order}">Doanh thu</a>
 
-                    <a class="nav-link text-black" th:href="@{/Gear/home}">Thoát</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+					<a class="nav-link text-black" th:href="@{/Gear/index}">Thoát</a>
+				</nav>
+			</div>
+		</div>
+	</header>
 
-        <!-- body -->
-        <div class="container my-3 py-3">
-            <h2>Danh sách sản phẩm</h2>
+	<!-- body -->
+	<div class="container my-3">
+		<div style="margin: 2% 0%;">
+			<div class="card" style="text-align: center;">
+				<h3 class="card-header">Danh sách sản phẩm</h3>
+				<div class="card-body" style="text-align: left;">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Tên sản phẩm</th>
+								<th>Giá</th>
+								<th>Hình ảnh</th>
+								<th>Thương hiệu</th>
+								<th>Loại</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="p:${items}">
+								<td th:text="${p.id}"></td>
+								<td th:text="${p.name}"></td>
+								<td th:text="${p.price}"></td>
+								<td th:text="${p.image}"></td>
+								<td th:text="${p.brand}"></td>
+								<td th:text="${p.category.name}"></td>
+								<td>
+									<a ng-click="edit(item)" th:href="@{|/Gear/Admin/product-edit/${p.id}|}"
+										class="btn btn-warning btn-sm">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+											viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+											stroke-linecap="round" stroke-linejoin="round">
+											<polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
+										</svg>
+									</a>
+									<a ng-click="delete(item)" th:href="@{|/Gear/Admin/delete/${p.id}|}"
+										class="btn btn-danger btn-sm">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+											viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+											stroke-linecap="round" stroke-linejoin="round">
+											<polyline points="3 6 5 6 21 6"></polyline>
+											<path
+												d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+											</path>
+											<line x1="10" y1="11" x2="10" y2="17"></line>
+											<line x1="14" y1="11" x2="14" y2="17"></line>
+										</svg>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Giá</th>
-                        <th>Hình ảnh</th>
-                        <th>Thương hiệu</th>
-                        <th>Loại</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="p:${items}">
-                        <td th:text="${p.id}"></td>
-						<td th:text="${p.name}"></td>
-						<td th:text="${p.price}"></td>
-						<td th:text="${p.image}"></td>
-						<td th:text="${p.brand}"></td>
-						<td th:text="${p.category.name}"></td>
-                        <td>
-                           		<a ng-click="edit(item)" th:href="@{|/Gear/Admin/product-edit/${p.id}|}" class="btn btn-warning btn-sm">
-									<b class="glyphicon glyphicon-edit">sửa</b>
-								</a>
-								<a ng-click="delete(item)" th:href="@{|/Gear/Admin/delete/${p.id}|}" class="btn btn-danger btn-sm">
-									<b class="glyphicon glyphicon-delete">xóa</b>
-								</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
 </body>
 
 </html>
@@ -253,8 +271,8 @@
 					</div>
 				</div>
 			</div> -->
-		<!-- Phần product edition -->
-	<!--	<div class="panel panel-default" ng-if="items">
+<!-- Phần product edition -->
+<!--	<div class="panel panel-default" ng-if="items">
 			<div class="panel-heading">PRODUCT LIST</div>
 			<a style="text-align: center;" th:href="@{/Gear/product-create}">create</a> <br>
 			<a style="text-align: center;" th:href="@{/Gear/adminaccount}">Account</a> <br>

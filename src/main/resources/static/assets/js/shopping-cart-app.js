@@ -25,7 +25,12 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
             this.items.splice(index, 1);
             this.saveToLocalStorage();
 		},
-		
+		getTotalPrice() {
+        	return this.items.reduce((total, item) => {
+            	return total + (item.price * item.qty);
+        	}, 0);
+   		 },
+
 		clear(){
 			this.items = []
             this.saveToLocalStorage();
@@ -65,8 +70,10 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
 				console.log("Username in get account():", username);
 			    return { username: username };
 			},
+			
 			createDate: new Date(),
 			address: "",
+			phonenumber: "",
 			get orderDetails(){
 				return $scope.cart.items.map(item => {
 					return {
@@ -83,6 +90,17 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
 					alert("Đặt hàng thành công!");
 					$cart.clear();
 					location.href = "/Gear/order/detail/" + resp.data.id;
+				}).catch(error => {
+					alert("Đặt hàng lỗi!")
+					console.log(error)
+				})
+			},
+			purchasepaypal(){
+				var order = angular.copy(this);
+				// Thực hiện đặt hàng
+				$http.post("/rest/orders", order).then(resp => {
+					alert("Đặt hàng thành công!");
+					$cart.clear();
 				}).catch(error => {
 					alert("Đặt hàng lỗi!")
 					console.log(error)

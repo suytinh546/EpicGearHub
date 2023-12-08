@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,9 @@ public class Order  implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@Column(name = "createdate")
 	Date createDate = new Date();
-	@ManyToOne 
+	String phonenumber;
+	@ManyToOne
+	//@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "username")
 	Account account;
 	

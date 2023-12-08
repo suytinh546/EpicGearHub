@@ -9,8 +9,8 @@ public class ShoppingCartController {
 	public String gh() {
 		return "Gear/gh";
 	}
-	@RequestMapping("/Gear/list-cart")
+	@RequestMapping("/Gear/cart")
 	public String listcart() {
-		return "Gear/list-cart";
+		return "Gear/cart";
 	}
 }
