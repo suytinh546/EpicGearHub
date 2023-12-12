@@ -43,8 +43,6 @@ public class AccountController {
 		String id="CUST";
 		Role rolecust = roleService.findById(id);
 		Authorities authorities = new Authorities();
-		List<Authorities> countautho = authodao.findAll();
-		authorities.setId(countautho.size()+1);
 		authorities.setAccount(account);
         authorities.setRole(rolecust);
         authodao.save(authorities);

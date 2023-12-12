@@ -39,91 +39,76 @@ public class ProductController {
 	RoleService roleService;
 	@Autowired
 	MyEmailService myemailservice;
-	
-//	@RequestMapping("/Gear/index")
-//	public String list(Model model, @RequestParam("cid")Optional<String> cid) {
-//		if (cid.isPresent()) {
-//			List<Product> list = productService.findByCategoryId(cid.get());
-//			model.addAttribute("items",list);	
-//		}
-//		else{
-//			List<Product> list = productService.findAll();
-//			model.addAttribute("items",list);
-//		}
-//		return "Gear/index";
-//	}
+
 	@RequestMapping("/Gear/ctsp/{id}")
-	public String ctsp(Model model,@PathVariable("id") Integer id) {
+	public String ctsp(Model model, @PathVariable("id") Integer id) {
 		Product item = productService.findById(id);
 		System.out.println("tới đây vẫn chạy");
-		model.addAttribute("item",item);
+		model.addAttribute("item", item);
 		return "Gear/ctsp";
-	}	
+	}
+
 	@RequestMapping("/Gear/product-detail/{id}")
-	public String productdetail(Model model,@PathVariable("id") Integer id) {
+	public String productdetail(Model model, @PathVariable("id") Integer id) {
 		Product item = productService.findById(id);
 		System.out.println("tới đây vẫn chạy");
-		model.addAttribute("item",item);
+		model.addAttribute("item", item);
 		List<Product> listcpu = productService.findByCategoryId("1");
-		model.addAttribute("productcpu",listcpu);
+		model.addAttribute("productcpu", listcpu);
 		List<Product> listvga = productService.findByCategoryId("2");
-		model.addAttribute("productvga",listvga);
+		model.addAttribute("productvga", listvga);
 		return "Gear/product-detail";
 	}
-	@RequestMapping("/Gear/home")
-	public String home(Model model) {
-		List<Product> listcpu = productService.findByCategoryId("1");
-		model.addAttribute("productcpu",listcpu);
-		List<Product> listvga = productService.findByCategoryId("2");
-		model.addAttribute("productvga",listvga);
-		return "Gear/home";
-	}
+
 	@RequestMapping("/Gear/index")
 	public String index(Model model) {
 		List<Product> listcpu = productService.findByCategoryId("1");
-		model.addAttribute("productcpu",listcpu);
+		model.addAttribute("productcpu", listcpu);
 		List<Product> listvga = productService.findByCategoryId("2");
-		model.addAttribute("productvga",listvga);
+		model.addAttribute("productvga", listvga);
 		return "Gear/index";
 	}
+
 	@RequestMapping("/Gear/list")
-	public String phanloai(Model model, @RequestParam("cid")Optional<String> cid) {
+	public String phanloai(Model model, @RequestParam("cid") Optional<String> cid) {
 		if (cid.isPresent()) {
 			List<Product> list = productService.findByCategoryId(cid.get());
-			model.addAttribute("items",list);	
-		}
-		else{
+			model.addAttribute("items", list);
+		} else {
 			List<Product> list = productService.findAll();
-			model.addAttribute("items",list);
+			model.addAttribute("items", list);
 		}
 		return "Gear/list";
 	}
+
 	@GetMapping("/Gear/search")
-	public String searchProduct(@RequestParam(value = "searchValue",required = false)String searchValue,Model model) {
+	public String searchProduct(@RequestParam(value = "searchValue", required = false) String searchValue,
+			Model model) {
 		List<Product> list = productService.findByName(searchValue);
-		model.addAttribute("product",list);
+		model.addAttribute("product", list);
 		return "Gear/product";
 	}
+
 	@RequestMapping("/Gear/product")
-	public String productlist(Model model, @RequestParam("cid")Optional<String> cid) {
+	public String productlist(Model model, @RequestParam("cid") Optional<String> cid) {
 		if (cid.isPresent()) {
 			List<Product> list = productService.findByCategoryId(cid.get());
-			model.addAttribute("product",list);	
-		}
-		else{
+			model.addAttribute("product", list);
+		} else {
 			List<Product> list = productService.findAll();
-			model.addAttribute("product",list);
+			model.addAttribute("product", list);
 		}
 		return "Gear/product";
 	}
-	
+
 	@RequestMapping("/Gear/about")
 	public String about() {
 		return "Gear/about";
 	}
-	
+
 	@RequestMapping("/Gear/news")
 	public String news() {
 		return "Gear/news";
 	}
+
 }

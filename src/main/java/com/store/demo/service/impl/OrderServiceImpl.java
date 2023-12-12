@@ -17,24 +17,26 @@ import com.store.demo.DAO.OrderDetailDAO;
 import com.store.demo.entity.Account;
 import com.store.demo.entity.Order;
 import com.store.demo.entity.OrderDetail;
+import com.store.demo.service.AccountService;
 import com.store.demo.service.OrderService;
 
 @Service
 public class OrderServiceImpl implements OrderService{
 	@Autowired
 	OrderDAO dao;
-	@Autowired
-	AccountDAO adao;
 	
 	@Autowired
 	OrderDetailDAO ddao;
 	
+	@Autowired
+	AccountDAO adao;
+	
 	public Order create(JsonNode orderData) {
-		
 		ObjectMapper mapper = new ObjectMapper();
 		
 		Order order = mapper.convertValue(orderData, Order.class);
-		adao.save(order.getAccount());
+		Account account = order.getAccount();
+		adao.save(account);
 		dao.save(order);
 		
 		TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {};

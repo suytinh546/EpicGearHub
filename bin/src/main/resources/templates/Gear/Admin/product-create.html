@@ -13,49 +13,53 @@
 <body style="background-color: rgb(236,236,236);">
 	<!-- header -->
 	<header class="sticky-top">
-        <div class="dropdown" style="z-index: 999;">
-            <div>
-                <nav class="nav nav-pills nav-justified"
-                    style="height: 100%; padding: 5px; align-items: center; background-color: white !important; font-size: 125%;">
+		<div class="dropdown" style="z-index: 999;">
+			<div>
+				<nav class="nav nav-pills nav-justified"
+					style="height: 100%; padding: 5px; align-items: center; background-color: white !important; font-size: 125%;">
 
-                    <a class="nav-link text-black" th:href="@{/Gear/Admin/adminaccount}">Tài khoản</a>
+					<a class="nav-link text-black" th:href="@{/Gear/Admin/adminaccount}">Tài khoản</a>
 
-                    <div class="nav-link">
-                        <a class="text-black text-decoration-none dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Sản phẩm
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/Gear/Admin/product-create}">Thêm sản phẩm</a></li>
-                            <li><a class="dropdown-item" th:href="@{/Gear/Admin/adminproduct}">Danh sách sản phẩm</a></li>
-                        </ul>
-                    </div>
+					<div class="nav-link">
+						<a class="text-black text-decoration-none dropdown-toggle" href="#" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							Sản phẩm
+						</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" th:href="@{/Gear/Admin/product-create}">Thêm sản phẩm</a></li>
+							<li><a class="dropdown-item" th:href="@{/Gear/Admin/adminproduct}">Danh sách sản phẩm</a>
+							</li>
+						</ul>
+					</div>
 
-                    <a class="nav-link text-black" th:href="@{/Gear/Admin/admin-order}">Doanh thu</a>
+					<a class="nav-link text-black" th:href="@{/Gear/Admin/admin-order}">Doanh thu</a>
 
-                    <a class="nav-link text-black" href="#">Thoát</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+					<a class="nav-link text-black" th:href="@{/Gear/home}">Thoát</a>
+				</nav>
+			</div>
+		</div>
+	</header>
 	<!-- body -->
 	<div class="container my-3 py-3">
 		<div class="container-admin-create-product" style="margin-left: 25%; margin-right: 25%;">
 			<h2>Tạo sản phẩm</h2>
-			<form th:action="@{/Gear/Admin/create}" th:object="${product}" method="post">
+			<form th:action="@{/Gear/Admin/create}" th:object="${product}" method="post" enctype="multipart/form-data">
 
 				<div class="form-group m-2 fs-6 text-black-50">
 					<label for="productName">Tên Sản phẩm</label>
-					<input type="text" class="form-control" th:field="*{name}" id="productName" placeholder="Nhập tên sản phẩm">
+					<input type="text" class="form-control" th:field="*{name}" id="productName"
+						placeholder="Nhập tên sản phẩm">
 				</div>
 
 				<div class="form-group m-2 fs-6 text-black-50">
 					<label for="productPrice">Giá</label>
-					<input type="number" class="form-control" th:field="*{price}" id="productPrice" placeholder="Nhập giá sản phẩm">
+					<input type="number" class="form-control" th:field="*{price}" id="productPrice"
+						placeholder="Nhập giá sản phẩm">
 				</div>
-				<div class="form-group m-2 fs-6 text-black-50">
-					<label for="productImage">Hình ảnh sản phẩm:</label>
-					<input type="file" class="form-control-file rounded-0" id="productImage">
+				<div class="form-group">
+					<label for="file">Choose File:</label>
+					<input type="file" name="file" id="file" class="form-control-file"
+						accept=".txt, .pdf, .doc, .docx, .jpg">
 				</div>
 				<div class="form-group m-2 fs-6 text-black-50">
 					<label for="productType">Loại Sản phẩm:</label>
@@ -74,7 +78,7 @@
 
 				<div class="form-group m-2 fs-6 text-black-50">
 					<label for="categoryId">CategoryID</label>
-					<select id="categoryId"  name="categoryId" th:field="*{category.id}" class="form-control" required>
+					<select id="categoryId" name="categoryId" th:field="*{category.id}" class="form-control" required>
 						<option value="1">CPU</option>
 						<option value="2">VGA</option>
 						<option value="3">Mainboard</option>

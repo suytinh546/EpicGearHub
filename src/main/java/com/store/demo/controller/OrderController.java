@@ -51,6 +51,7 @@ public class OrderController {
 	@PostMapping("/Gear/order/payment")
 	public String payment(@RequestParam("total")double total) {
 		try {
+			System.out.println(total);
 			Payment payment = service.createPayment(total, "USD", "Paypal",
 					"sale", "dat hang", "http://localhost:8080/" + CANCEL_URL,
 					"http://localhost:8080/" + SUCCESS_URL);
