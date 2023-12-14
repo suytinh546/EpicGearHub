@@ -85,6 +85,16 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
 			},
 			purchase(){
 				var order = angular.copy(this);
+				if(order.address === "" || order.phonenumber === ""){
+					alert("Đặt hàng lỗi! Vui lòng nhập đầy đủ thông tin")
+					console.log(error)
+				}else if($cart.items.length === 0){
+					alert("Đặt hàng lỗi! Giỏ hàng đang bị trống, vui lòng thêm sản phẩm vào giỏ hàng")
+					console.log(error)
+				}
+				else{
+					
+				
 				// Thực hiện đặt hàng
 				$http.post("/rest/orders", order).then(resp => {
 					alert("Đặt hàng thành công!");
@@ -94,7 +104,7 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
 					alert("Đặt hàng lỗi!")
 					console.log(error)
 				})
-			},
+			}},
 			purchasepaypal(){
 				var order = angular.copy(this);
 				// Thực hiện đặt hàng

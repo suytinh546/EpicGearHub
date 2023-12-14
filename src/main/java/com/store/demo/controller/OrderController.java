@@ -49,10 +49,10 @@ public class OrderController {
 		return "Gear/order/checkoutpaypal";
 	}
 	@PostMapping("/Gear/order/payment")
-	public String payment(@RequestParam("total")double total) {
+	public String payment(@RequestParam("total")Double total) {
 		try {
 			System.out.println(total);
-			Payment payment = service.createPayment(total, "USD", "Paypal",
+			Payment payment = service.createPayment(total, "USD", "paypal",
 					"sale", "dat hang", "http://localhost:8080/" + CANCEL_URL,
 					"http://localhost:8080/" + SUCCESS_URL);
 			for(Links link:payment.getLinks()) {
@@ -97,8 +97,7 @@ public class OrderController {
 	public String list(Model model, HttpServletRequest request) {
 		String username = request.getRemoteUser();
 		List<Order> order = orderService.findByUsername(username);
-		System.out.println(order.get(0).getAccount().getUsername());
-		model.addAttribute("orders", orderService.findByUsername(username));
+		model.addAttribute("orders", order);
 		return "Gear/order/list";
 	}
 
