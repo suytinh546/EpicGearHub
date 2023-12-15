@@ -18,6 +18,7 @@ import com.store.demo.entity.Account;
 import com.store.demo.entity.Order;
 import com.store.demo.entity.OrderDetail;
 import com.store.demo.service.AccountService;
+import com.store.demo.service.MyEmailService;
 import com.store.demo.service.OrderService;
 
 @Service
@@ -31,12 +32,27 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	AccountDAO adao;
 	
-	public Order create(JsonNode orderData) {
+	@Autowired
+	AccountService accountService;
+	
+	@Autowired
+	MyEmailService myemailservice;
+	
+	
+	public Order create(JsonNode orderData, Account account) {
 		ObjectMapper mapper = new ObjectMapper();
 		
 		Order order = mapper.convertValue(orderData, Order.class);
-		Account account = order.getAccount();
-		adao.save(account);
+		order.setAccount(account);
+//		Account account = order.getAccount();
+//		System.out.print(account.getUsername() + order.getAccount().getUsername());
+//		Account accdao = accountService.findById(order.getAccount().getUsername());
+//		account.setPassword(accdao.getPassword());
+//		account.setEmail(accdao.getEmail());
+//		order.setAccount(account);
+		//accountService.update(account);
+		System.out.print(order.getAccount().getEmail());
+		myemailservice.sendEmail(order.getAccount().getEmail(), "Đặt hành thành công", "Đơn hàng của bạn đã được đặt thành công");
 		dao.save(order);
 		
 		TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {};
@@ -57,6 +73,12 @@ public class OrderServiceImpl implements OrderService{
 	public List<Order> findByUsername(String username) {
 		// TODO Auto-generated method stub
 		return dao.findByUsername(username);
+	}
+
+	@Override
+	public Order create(JsonNode orderData) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

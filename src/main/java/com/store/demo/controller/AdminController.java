@@ -72,7 +72,6 @@ public class AdminController {
 				String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
 
 				// Sửa tên và đuôi của file
-				List<Product> list = pdao.findAll();
 				String modifiedFileName = productUpdate.getImage();
 
 				// Đặt vị trí cho file (lưu trong thư mục ngoài project)
@@ -104,7 +103,7 @@ public class AdminController {
 		return "Gear/Admin/product-edit";
 	}
 
-	@PostMapping("/Gear/Admin/Admin/update/{id}")
+	@PostMapping("/Gear/update/{id}")
 	public String updateProduct(@ModelAttribute("product") Product updateProduct, @PathVariable("id") Integer id) {
 		Product product = productService.findById(id);
 		System.out.println(updateProduct.getCategory().getName());
