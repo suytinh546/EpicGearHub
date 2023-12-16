@@ -54,7 +54,8 @@ public class AccountController {
 		return "Gear/doimk";
 	}
 	@PostMapping("/Gear/updatepass")
-	public String updatepass(Model model,HttpServletRequest request,@RequestParam("password")String password,@RequestParam("newpassword1")String newpassword1,@RequestParam("newpassword2")String newpassword2 ) {
+	public String updatepass(Model model,HttpServletRequest request,@RequestParam("password")String password,
+								@RequestParam("newpassword1")String newpassword1,@RequestParam("newpassword2")String newpassword2 ) {
 		String username = request.getRemoteUser();
 		Account account = accountService.findById(username);
 		if(account.getPassword().equals(password)) {

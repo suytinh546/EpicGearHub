@@ -110,8 +110,8 @@
 			<div class="container p-3">
 				<form th:action="@{/Gear/updatepass}" method="post">
 					<div class="m-4" th:object="${account}">
-						<input name="text" type="text" class="form-control" th:field="${account.username}" id="password"
-							placeholder="Nhập mật khẩu" readonly>
+						<h2></h2><h2 >Tài khoản: [[${account.username}]]</h2>
+
 					</div>
 					<div class="m-4">
 						<input name="password" type="password" class="form-control" id="password"
