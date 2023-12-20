@@ -31,22 +31,31 @@ public class AccountController {
 	@Autowired
 	MyEmailService myemailservice;
 	
-	@RequestMapping("/Gear/user-create")
+	@RequestMapping("/Gear/user-create")//  goi ra form dang ky
 	public String dangky(Model model ) {
 		Account account = new Account();
 		model.addAttribute("account",account);
 		return "Gear/user-create";
 	}
-	@PostMapping("/Gear/usercreate")
-	public String dangky(@ModelAttribute("account") Account account ) {
-		accountService.create(account);
-		String id="CUST";
-		Role rolecust = roleService.findById(id);
-		Authorities authorities = new Authorities();
-		authorities.setAccount(account);
-        authorities.setRole(rolecust);
-        authodao.save(authorities);
-		return "Gear/login";
+	@PostMapping("/Gear/usercreate")// sau khi nhấn nút đăng ký sẽ gọi phương thức này
+	public String dangky(@ModelAttribute("account") Account account,Model model ) {
+		if(account.getUsername() == null || account.getUsername().isEmpty() ||
+			    account.getPassword() == null || account.getPassword().isEmpty() ||
+			    account.getEmail() == null || account.getEmail().isEmpty()) {
+			model.addAttribute("account",account);
+			model.addAttribute("message", "Vui lòng nhập đầy đủ thông tin");
+			return "Gear/user-create";
+		}else {
+			accountService.create(account);
+			String id="CUST";
+			Role rolecust = roleService.findById(id);
+			Authorities authorities = new Authorities();
+			authorities.setAccount(account);
+	        authorities.setRole(rolecust);
+	        authodao.save(authorities);
+			return "Gear/login";
+		}
+		
 	}
 	@RequestMapping("/Gear/doimk")
 	public String doimk(Model model,HttpServletRequest request ) {
